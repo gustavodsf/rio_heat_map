@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Rio Heatmap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow"/>
+  <meta name="description" content="This example shows a leaflet heatmap layer example for the heatmap.js leaflet plugin"/>
+  <meta name="keywords" content="leaflet heatmap, heatmap.js plugin leaflet"/>
+  <link rel="stylesheet" href="https://www.patrick-wied.at/static/heatmapjs/assets/css/commons.css"/>
+  <link rel="stylesheet" href="https://www.patrick-wied.at/static/heatmapjs/assets/css/example-commons.css"/>
+  <link rel="stylesheet" href="https://www.patrick-wied.at/static/heatmapjs/assets/third-party/prism/prism.css"/>
+  <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css"/>-->
+  <link rel="stylesheet" href="leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="css/bootstrap-grid.min.css"/>
+  <link rel="stylesheet" href="css/bootstrap-reboot.min.css"/>
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/font-awesome.css"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <!--<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>-->
+  <script src="leaflet/dist/leaflet.js"></script>
+  <style>#share{display:none;float:right;font-size:14px;line-height:170%}.symbol{display:inline!important;float:right}</style>
+</head>
+<body>
+<style type="text/css">
+  #sideBox{
+        width: 250px;
+        margin-top: 175px;
+        /* clear: both; */
+        position: absolute;
+        font-size: 16px;
+        background-color: transparent;
+        opacity: 0.7;
+        z-index: 1000;
+  }
+  #ml{
+    color: red;
+    background-color: #ffffff;
+  }
+</style>
+  <script src="heatmap/heatmap.min.js"></script>
+  <script src="heatmap/leaflet-heatmap.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="bootstrap.bundle.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  
+  <script>
+     function radar(locations, map) {
+        var inRange = [], latlng_b;
+        arrayGM = [];
+        arrayGM.push(new L.LatLng(-22.8797876, -43.5631799));
+        arrayGM.push(new L.LatLng(-22.3797876, -43.5631799));
+
+        for (var k=0; k<arrayGM.length; k++){
+          L.marker(arrayGM[k]).addTo(map).bindPopup("<b>Guarda Municipal ID: "+k+"</b>").openPopup();
+          for (var i=0; i<locations.length; i++){
+              var lat = locations[i].lat;
+              var lng = locations[i].lng;
+              
+              latlng_b = new L.LatLng(lat, lng);
+              if (arrayGM[k].distanceTo(latlng_b) < 100) {
+                  inRange.push(locations[i]);
+                  alert("O guarda municipal "+k+" pode ser deslocado para o ponto "+latlng_b);
+              }
+              //console.log(inRange);
+          }
+        }
+      } 
+    
+    function carregaPontosMapa(response) {
+        //console.log(response);
+        //console.log(response.length);
+        
+          //response = JSON.parse(response);
+          //response = JSON.parse(response[0]);
+          //console.log(response[0]);
+          //response = response[0];
+          //response = response.replace("[","").replace("]","").split(',')
+          count=0;
+          var localities = new Array(response.length/3);
+          //console.log(response);
+          
+          for(i=0;i<response.length/3; i++){
+              
+              localities[i]={
+                  "lat" : parseFloat(response[count].replace('\'','')),
+                  "lng" : parseFloat(response[count+1].replace('\'','')),
+                  "count" : parseFloat(response[count+2])
+              };
+              count+=3;
+          }
+          //console.log(localities);
+          
+          var baseLayer = L.tileLayer(
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+              maxZoom: 18
+            }
+          );
+          var testData = {
+              max: 8,
+              data: localities//[{"lat": 24.6408, "lng":46.7728, "count": 3},{"lat": 50.75, "lng":-1.55, "count": 1}]
+          };
+          var cfg = {
+            // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+            // if scaleRadius is false it will be the constant radius used in pixels
+            "radius": 20,
+            "maxOpacity": 1, 
+            // scales the radius based on map zoom
+            //"scaleRadius": true, 
+            // if set to false the heatmap uses the global maximum for colorization
+            // if activated: uses the data maximum within the current map boundaries 
+            //   (there will always be a red spot with useLocalExtremas true)
+            //"useLocalExtrema": true,
+            // which field name in your data represents the latitude - default "lat"
+            latField: 'lat',
+            // which field name in your data represents the longitude - default "lng"
+            lngField: 'lng',
+            // which field name in your data represents the data value - default "value"
+            valueField: 'count'
+          };
+
+
+          var heatmapLayer = new HeatmapOverlay(cfg);
+          $("#hack-content").html("")
+          $("#hack-content").html('<div class="heatmap" id="map-canvas">');
+          var map = new L.Map('map-canvas', {
+            center: new L.LatLng(-22.8797876, -43.5631799),
+            zoom: 10,
+            layers: [baseLayer, heatmapLayer]
+          });
+
+          heatmapLayer.setData(testData);
+
+          radar(localities, map);  
+    }
+    
+    function enviaDadosPython(val){
+        $.ajax({                 
+            type: 'GET',                                  
+            url: 'http://45.33.117.245:8080/algo/kde/'+val,                 
+            //async: false,                 
+            data: "",
+            success: function(response) {
+          		carregaPontosMapa(response);
+            }
+        });  
+    }
+
+    function enviaDadosPython2(val){
+        $.ajax({                 
+            type: 'GET',                                  
+            url: 'http://45.33.117.245:8080/algo/ml/'+val,                 
+            //async: false,                 
+            data: "",
+            success: function(response) {
+              $("#ml").text(response);
+            }
+        });  
+    }
+
+    function fireViolenceType(){
+      $("#violence").on('change', function(){
+          var val = $(this).val();    
+          enviaDadosPython(val);
+          enviaDadosPython2(val);
+      });
+    }
+
+    function pegaTipoViolencia(){
+      $.ajax({                 
+            type: 'GET',                                  
+            url: 'http://45.33.117.245:8080/violence/type/',                 
+            //async: false,                 
+            data: "",
+            success: function(data) {
+              var options = '';
+              for (var x = 0; x < data.length; x++) {
+                if((data[x]['id']!=6) && (data[x]['id']!=4))
+                  options += '<option value="' + data[x]['id'] + '">' + data[x]['name'] + '</option>';
+              }
+              $('#violence').html(options);
+              fireViolenceType();
+            }
+        });
+    }
+
+    enviaDadosPython(2);
+    enviaDadosPython2(2);
+    pegaTipoViolencia();
+
+  </script>
+  <script src="heatmap/prism.js"></script>
+  <!-- Gráficos por tipo de violência, por tempo de ocorrência, ocorrência por gênero, 
+  quanto de valores foi perdido -->
+    <div class="hack">
+      <div class="hack-menu">
+          <div class="hack-cor-logo">
+              <img src="./img/logo_centrodeoperacoesdorio.png">
+          </div>
+          <div class="hack-btn-group">
+            <div class="hack-btn">
+              <a class="hack-link" href="index.html">
+                <i class="fa fa-map-marker fa-1x" aria-hidden="true"></i>
+                Mapa
+              </a>
+            </div>
+            <div class="hack-btn">
+              <a class="hack-link" href="chart.html">
+                <i class="fa fa-bar-chart fa-1x" aria-hidden="true"></i>
+                Gráfico
+              </a>
+            </div>
+          </div>
+      </div>
+      <div id="sideBox"><p>Accurácia da IA:</p><p id="ml"></p><select id="violence"></select></div>
+      <div id="hack-content">
+        <div class="heatmap" id="map-canvas">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+Retorna uma lista com todas ocorrencias 
+---
+tags:
+  - Ocorrencias 
+responses:
+  200:
+    description: Uma lista de ocorrencias

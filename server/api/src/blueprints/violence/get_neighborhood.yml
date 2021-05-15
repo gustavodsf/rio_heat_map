@@ -1,0 +1,7 @@
+Retorna a quantidade de crimes de acordo com o bairro
+---
+tags:
+  - Metricas
+responses:
+  200:
+    description: crimes por bairro da cidade

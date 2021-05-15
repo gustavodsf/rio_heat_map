@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Mancha Criminal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow"/>
+  <meta name="description" content="This example shows a leaflet heatmap layer example for the heatmap.js leaflet plugin"/>
+  <meta name="keywords" content="leaflet heatmap, heatmap.js plugin leaflet"/>
+  <link rel="stylesheet" href="https://www.patrick-wied.at/static/heatmapjs/assets/css/commons.css"/>
+  <link rel="stylesheet" href="https://www.patrick-wied.at/static/heatmapjs/assets/css/example-commons.css"/>
+  <link rel="stylesheet" href="https://www.patrick-wied.at/static/heatmapjs/assets/third-party/prism/prism.css"/>
+  <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css"/>-->
+  <link rel="stylesheet" href="leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="css/bootstrap-grid.min.css"/>
+  <link rel="stylesheet" href="css/bootstrap-reboot.min.css"/>
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/font-awesome.css"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <!--<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>-->
+  <script src="leaflet/dist/leaflet.js"></script>
+  <style>#share{display:none;float:right;font-size:14px;line-height:170%}.symbol{display:inline!important;float:right}</style>
+</head>
+<body>
+  <script src="heatmap/heatmap.min.js"></script>
+  <script src="heatmap/leaflet-heatmap.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+  <script src="bootstrap.bundle.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  
+  <script>
+
+    function enviaDadosPython(type){
+        
+        $.ajax({                 
+            type: 'GET',                                  
+            url: 'http://45.33.117.245:8080/violence/by/neighborhood',                 
+            //async: false,                 
+            data: "",
+            success: function(response) {
+              var d = document.getElementById("genderChart");
+              for i=0;i<response.length;
+                {
+                  print(a[amount])
+                }
+                data = {
+                  datasets: [{
+                      data: [response['feminino'],response['masculino']],
+                      backgroundColor: [
+                        'rgba(255, 99, 132,0.5)',
+                        'rgba(54, 162, 235,0.5)',
+                      ],
+                      borderColor: [
+                        'rgba(255,99,132,0.5)',
+                        'rgba(54, 162, 235,0.5)'
+                      ],
+                      borderWidth: 1
+                  }],
+
+  var d = document.getElementById("genderChart");
+        x = []
+        y = []
+          for(i=0;i<response.length;i++)
+            {
+              x.push(response[i]["amount"]);
+              y.push(response[i]["name"]);
+            }
+          data = {
+              datasets: [{
+                  data: x,
+                  backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)',
+                    'rgba(232, 44, 12, 0.5)',
+                    'rgba(3, 40, 12, 0.5)', 
+                    'rgba(61, 0, 255, 0.5)',
+                    'rgba(5, 217, 0, 0.5)'
+                  ],
+                  borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(232, 44, 12, 1)',
+                    'rgba(3, 40, 12, 1)'                    
+                  ],
+                  borderWidth: 1
+              }],
+
+              // These labels appear in the legend and in the tooltips when hovering different arcs
+              labels:y,
+          };
+          var myChart = new Chart(d,{
+              type: 'doughnut',
+              data: data
+          })
+
+
+      
+ 
+
+
+          
+    }
+
+  </script>
+  <script src="heatmap/prism.js"></script>
+  <!-- Gráficos por tipo de violência, por tempo de ocorrência, ocorrência por gênero, 
+  quanto de valores foi perdido -->
+    <div class="hack">
+      <div class="hack-menu">
+          <div class="hack-cor-logo">
+              <img src="./img/logo_centrodeoperacoesdorio.png">
+          </div>
+          <div class="hack-btn-group">
+            <div class="hack-btn">
+              <a class="hack-link" href="index.html">
+                <i class="fa fa-map-marker fa-1x" aria-hidden="true"></i>
+                Mapa
+              </a>
+            </div>
+            <div class="hack-btn" >
+              <a class="hack-link" href="chart.html">
+                <i class="fa fa-bar-chart fa-1x" aria-hidden="true"></i>
+                Gráfico
+              </a>
+            </div>
+      </div>
+      <div class="hack-content" >
+      <nav style="height: 10%;width: 50%;margin-left: 30%; background-color: #09222a !important;" class="navbar navbar-expand-sm bg-dark navbar-dark" >
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="chart.html">Gráficos</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="chart_tipos.html">Gráficos e resultados da I.A</a>
+          </li>
+        </ul>
+      </nav>
+
+        <div class="hack-chart-content">
+          <div class="hack-chart-1">
+            <canvas id="myChart" width="400" height="400"></canvas>
+          </div>
+          <div class="hack-chart-2"></div>
+          <div class="hack-chart-3"></div>
+          <div class="hack-chart-4"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

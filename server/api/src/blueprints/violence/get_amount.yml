@@ -1,0 +1,7 @@
+Retorna o quanto foi o prejuizo ate o momento
+---
+tags:
+  - Metricas
+responses:
+  200:
+    description: Prejuizo ate a presente data.

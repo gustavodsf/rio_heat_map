@@ -1,0 +1,17 @@
+### ERROR : Ladeira Saint Roman
+### ERROR : Praça Benedito Cerqueira
+### ERROR : Praça Eugênio Franco
+### ERROR : Rua General Oswaldo Cordeiro de Faria
+### ERROR : Praça Coronel João Zani
+### ERROR : Rua Floresta da Paz
+### ERROR : Praça Barão da Taquara
+### ERROR : Praça Soldado Cosme dos Santos
+### ERROR : Praça Frederico Durval
+### ERROR : Praça Barbosa de Oliveira
+### ERROR : Rua Professor Álvaro Ramos
+### ERROR : Parque Poeta Manoel Bandeira
+### ERROR : R. Ten. Ronald Santoro
+### ERROR : Praça Cristiano Ottoni
+### ERROR : Estrada da Ucrânia
+### ERROR : Praça Campo de Marte
+### ERROR : Rua Tenente Agenor de Brito

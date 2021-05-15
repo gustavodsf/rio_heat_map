@@ -1,0 +1,124 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.hack{
+  width: 100vw;
+  height: 100vh;
+}
+
+.hack-menu{
+  width: 100vw;
+  height: 11vh;
+  line-height: 12vh;
+  background:#09222a;
+  float: left;
+  border-bottom: 1vh solid #5f7f97;
+}
+
+.hack-content{
+  width: 100vw;
+  height: 88vh;
+  float: left;
+}
+
+.hack-cor-logo img{
+  width: 12vw;
+  margin-top: 2vh;
+  margin-left: 1.5vw;
+  float: left;
+}
+
+.hack-logo img{
+  width: 13vw;
+  margin-top: 28vh;
+  margin-left: 1vw;
+}
+
+.hack-btn-group{
+  margin-right: 4vw;
+  float: right;
+}
+
+.hack-btn {
+  float: left;
+  padding-left: 10px;
+}
+
+.hack-link{
+  color: white !important;
+  cursor: pointer;
+}
+
+.hack-link:hover{
+  color: #5f7f97!important;
+}
+
+.btn.btn-default{
+  height: 8vh;
+  line-height: 8vh;
+}
+
+.fa{
+  margin-left: 2px;
+}
+.text{
+  margin-left: 20px;
+}
+
+.demo-wrapper{
+  border: none;
+}
+
+.heatmap{
+  width: 100vw;
+  height: 88vh;
+}
+
+.hack-chart-content{
+  height: 80vh;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 40vh;
+  grid-template-areas:
+    "chart1 chart2"
+    "chart3 chart3 ";
+  display: grid;
+}
+
+#hack-chart-1{
+  grid-area: chart1;
+}
+
+#hack-chart-2{
+  grid-area: chart2;
+}
+
+#hack-chart-3{
+  grid-area: chart3;
+}
+
+.title{
+  text-align: center;
+}
+
+.chart-title{
+  font-weight: bold;
+  font-size: 20px;
+  width: 160px;
+  border-bottom: 2px solid #5f7f97;
+}
+
+.negrito{
+  font-weight: bold;
+}
+
+.genderChart{
+  height: 48vh !important;
+  width:  48vh!important;
+}
+
+.borderChart{
+  height: 48vh !important;
+  width:  48vh!important;
+}

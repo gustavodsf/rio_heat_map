@@ -1,0 +1,13 @@
+Retorna a reposta do Algoritmo de Machine Learnning
+---
+tags:
+  - Algoritmos 
+parameters:
+  - name: tipo
+    in: path
+    type: integer
+    required: true
+    description: tipo de crime
+responses:
+  200:
+    description: Reposta da execucao do Algoritmo de Machine Learnning

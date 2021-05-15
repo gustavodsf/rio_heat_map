@@ -1,0 +1,7 @@
+Retorna os tipos de violencias cadastrado no sistema
+---
+tags:
+  - Violencia
+responses:
+  200:
+    description: Uma lista com os tipos de violencia

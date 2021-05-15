@@ -1,0 +1,16 @@
+flasgger
+Flask-Admin
+Flask-Babel
+Flask-Bootstrap
+Flask-Cache
+Flask-Cors
+Flask-DebugToolbar
+Flask-Security
+Flask-Testing
+pytz
+scikit-image
+scipy
+psycopg2
+nltk
+tweepy
+sklearn
